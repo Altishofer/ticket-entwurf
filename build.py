@@ -688,6 +688,8 @@ body{background:radial-gradient(120% 90% at 50% 40%,#f3f5f9 0%,#dfe4ec 70%,#d3d9
 .page .pass{left:0;top:0;outline:0}
 .duo .page.f{left:50%;top:50%;z-index:2;transform:translate(-50%,-104%) rotate(-3deg)}
 .duo .page.b{left:50%;top:50%;z-index:1;transform:translate(-50%,6%) rotate(2.2deg)}
+.stack .page.f{left:50%;top:50%;transform:translate(-50%,calc(-100% - 5mm))}
+.stack .page.b{left:50%;top:50%;transform:translate(-50%,5mm)}
 .solo .page.f{left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg) scale(.96)}
 """
 
@@ -705,7 +707,8 @@ def show_file(key, mode):
 
 (HERE.parent / "druck").mkdir(exist_ok=True)
 (HERE.parent / "druck" / "boarding-pass-ticket.html").write_text(ticket_file("14r"))
-(HERE.parent / "druck" / "teilen-beide.html").write_text(show_file("14r", "duo"))
+(HERE.parent / "druck" / "teilen-beide.html").write_text(show_file("14r", "duo"))  # Render-Fenster 800 x 790
+(HERE.parent / "druck" / "teilen-gerade.html").write_text(show_file("14r", "stack"))  # Render-Fenster 800 x 770
 
 (HERE / "druck").mkdir(exist_ok=True)
 (HERE / "druck" / "boarding-pass-druck.html").write_text(ready_file("14r").replace('src="hb-mad.png"', 'src="../hb-mad.png"'))
