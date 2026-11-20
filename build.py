@@ -34,7 +34,7 @@ FONTS = ("https://fonts.googleapis.com/css2?"
          "&family=Archivo:wght@400;500;700;900"
          "&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700"
          "&family=DM+Sans:wght@400;500;700"
-         "&family=Righteous&family=Work+Sans:wght@400;500;600;700"
+         "&family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@500;600&family=Space+Grotesk:wght@500;700"
          "&display=swap")
 
 COMMON = """
@@ -46,15 +46,15 @@ COMMON = """
 """
 
 VARIANTS = [
-    ("1", "Teal", "Die aktuelle Version im Stil der Einladungsseite: Petrol mit Akzent in Sonnengelb.", ""),
+    ("1", "Teal", ""),
 
-    ("2", "Thermodruck", "Wie ein echter Boarding Pass vom Automaten: alles in Schreibmaschinenschrift, schwarz auf Weiss, mit rotem Stempel.", """
-.v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#d2232a;--sun-soft:transparent;
+    ("2", "Thermodruck", """
+.v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#2346a0;--sun-soft:transparent;
   --display:"IBM Plex Mono",ui-monospace,monospace;--body:"IBM Plex Mono",ui-monospace,monospace;--mono:"IBM Plex Mono",ui-monospace,monospace;border-radius:2mm}
 .v-2 .band{background:var(--paper);color:var(--ink);height:13mm;border-bottom:.6mm solid var(--ink)}
 .v-2 .brand{font-weight:700;font-size:11pt}
 .v-2 .brand small{opacity:1;color:var(--muted);font-weight:500}
-.v-2 .band .kind b{color:var(--sun);font-weight:700}
+.v-2 .band .kind b{color:var(--ink);font-weight:700}
 .v-2 .lbl{font-weight:500;letter-spacing:.08em;font-size:5.4pt}
 .v-2 .val{font-weight:700;font-size:9.5pt}
 .v-2 .grid .val{font-size:8.6pt}
@@ -69,8 +69,8 @@ VARIANTS = [
 .v-2 .info h3{font-weight:700}
 """),
 
-    ("3", "Swiss", "Reduziert und typografisch: grosse Ortskürzel, Schwarz und Weiss mit Signalrot, keine Rundungen.", """
-.v-3 .pass{--ink:#111111;--muted:#6b6b6b;--line:#d6d6d6;--paper:#ffffff;--accent:#e30613;--accent-soft:#111111;--accent-deep:#111111;--sun:#e30613;--sun-soft:#e30613;
+    ("3", "Swiss", """
+.v-3 .pass{--ink:#111111;--muted:#6b6b6b;--line:#d6d6d6;--paper:#ffffff;--accent:#1f3bd6;--accent-soft:#111111;--accent-deep:#111111;--sun:#1f3bd6;--sun-soft:#1f3bd6;
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;--body:"Archivo","Helvetica Neue",Arial,sans-serif;border-radius:0;outline-color:#cfcfcf}
 .v-3 .band{background:var(--paper);color:var(--ink);height:14mm;border-bottom:.4mm solid var(--ink)}
 .v-3 .brand{font-weight:900}
@@ -88,12 +88,12 @@ VARIANTS = [
 .v-3 .grid{border-top:.4mm solid var(--ink)}
 .v-3 .foot{background:var(--ink);color:#fff}
 .v-3 .stub,.v-3 .info{background:var(--paper)}
-.v-3 .front .stub,.v-3 .back .stub{border-style:solid;border-width:0 0 0 .3mm;border-color:var(--ink)}
-.v-3 .back .stub{border-width:0 .3mm 0 0}
+.v-3 .front .stub{border-style:solid;border-width:0 0 0 .3mm;border-color:var(--ink)}
+.v-3 .back .stub{border-style:solid;border-width:0 .3mm 0 0;border-color:var(--ink)}
 .v-3 .info h3{color:var(--accent)}
 """),
 
-    ("4", "Nachtflug", "Dunkles Nachtblau mit Gold und einer Serifenschrift. Wirkt festlich. Braucht viel Druckfarbe, das Schreibfeld hinten bleibt hell.", """
+    ("4", "Nachtflug", """
 .v-4 .pass{--ink:#f2ede2;--muted:#9fa9bc;--line:#33435d;--paper:#0f1b2e;--accent:#0a1422;--accent-soft:#0a1422;--accent-deep:#e6c27c;--sun:#e6c27c;--sun-soft:transparent;
   --display:"Fraunces",Georgia,serif;--body:"DM Sans","Segoe UI",system-ui,sans-serif;outline-color:#0f1b2e}
 .v-4 .band{background:var(--accent);color:var(--ink);border-bottom:.3mm solid var(--sun)}
@@ -108,23 +108,68 @@ VARIANTS = [
 .v-4 .back .letter{background:#f6f2ea;--line:#cfc6b4}
 """),
 
-    ("5", "Retro", "Airline-Ticket aus den Siebzigern: Streifen in Rot, Orange und Senfgelb, runde Schrift, warmes Braun.", """
-.v-5 .pass{--ink:#2b1d16;--muted:#7a6457;--line:#e0d3c7;--paper:#fffdf9;--accent:#c4421a;--accent-soft:#fbeadf;--accent-deep:#8f2d10;--sun:#f2a922;--sun-soft:#fff1d6;
-  --display:"Righteous","Segoe UI",system-ui,sans-serif;--body:"Work Sans","Segoe UI",system-ui,sans-serif;border-radius:7mm}
-.v-5 .band{position:relative;padding-bottom:3mm}
-.v-5 .band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3.2mm;background:linear-gradient(#e8742a 0 33%,#f2a922 33% 66%,#6b3a1f 66%)}
-.v-5 .brand,.v-5 .val,.v-5 .iata,.v-5 .band .kind b{font-weight:400}
-.v-5 .band .kind b{color:#ffd27a}
-.v-5 .brand small{color:#fff;opacity:.9;font-family:var(--body);font-weight:600}
-.v-5 .iata{color:var(--accent)}
-.v-5 .lbl{font-family:var(--body);color:var(--accent-deep)}
-.v-5 .status{color:var(--accent-deep);border-color:var(--sun);border-radius:4mm}
-.v-5 .stub,.v-5 .info{background:#fff7ee}
-.v-5 .info h3{color:var(--accent)}
+    ("5", "Cockpit", """
+.v-5 .pass{--ink:#e4eef2;--muted:#7d929f;--line:#26363f;--paper:#10171c;--accent:#0a0f13;--accent-soft:#0a0f13;--accent-deep:#6fe3ff;--sun:#6fe3ff;--sun-soft:transparent;
+  --display:"JetBrains Mono",ui-monospace,monospace;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif;outline-color:#10171c}
+.v-5 .band{background:var(--accent);color:var(--ink);border-bottom:.3mm solid var(--sun)}
+.v-5 .body{background-image:linear-gradient(rgba(111,227,255,.07) .2mm,transparent .2mm),linear-gradient(90deg,rgba(111,227,255,.07) .2mm,transparent .2mm);background-size:5mm 5mm}
+.v-5 .val{font-weight:700}
+.v-5 .iata{font-weight:700;color:var(--sun);font-size:23pt}
+.v-5 .lbl{color:var(--sun);opacity:.8}
+.v-5 .status{color:var(--sun);border-color:var(--sun);background:transparent;border-radius:0}
+.v-5 .foot{color:var(--ink)}
+.v-5 .stub,.v-5 .info{background:#0d1317}
+.v-5 .info h3{color:var(--sun)}
+.v-5 .back .letter{background:#eef3f5;--line:#b9c6cd}
+"""),
+
+    ("6", "Lackierung", """
+.v-6 .pass{--ink:#14213d;--muted:#5a6680;--line:#d3d9e6;--paper:#ffffff;--accent:#14213d;--accent-soft:#14213d;--accent-deep:#14213d;--sun:#4cc9f0;--sun-soft:#eaf8fd;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Barlow","Segoe UI",system-ui,sans-serif}
+.v-6 .band{background:linear-gradient(115deg,#14213d 0 56%,#4cc9f0 56% 59.5%,#14213d 59.5% 61.5%,#2f6fe4 61.5% 67%,#14213d 67%)}
+.v-6 .stub .band,.v-6 .back .main .band{background:linear-gradient(115deg,#14213d 0 70%,#4cc9f0 70% 76%,#14213d 76% 79%,#2f6fe4 79% 88%,#14213d 88%)}
+.v-6 .brand,.v-6 .val,.v-6 .iata,.v-6 .band .kind b{font-style:italic;font-weight:800}
+.v-6 .iata{font-size:31pt;letter-spacing:0;color:var(--ink)}
+.v-6 .val{font-size:11.5pt}
+.v-6 .grid .val{font-size:10.5pt}
+.v-6 .pax .val{font-size:17pt}
+.v-6 .lbl{font-family:var(--body);font-weight:600}
+.v-6 .status{color:var(--ink);border-color:var(--sun);background:var(--sun-soft);font-family:var(--body)}
+.v-6 .foot{color:#fff}
+.v-6 .stub,.v-6 .info{background:#f6f8fc}
+"""),
+
+    ("7", "Blaupause", """
+.v-7 .pass{--ink:#f4f8ff;--muted:#bccdec;--line:rgba(255,255,255,.35);--paper:#1d4f9c;--accent:#1d4f9c;--accent-soft:transparent;--accent-deep:#ffffff;--sun:#ffffff;--sun-soft:transparent;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+  background-image:linear-gradient(rgba(255,255,255,.09) .2mm,transparent .2mm),linear-gradient(90deg,rgba(255,255,255,.09) .2mm,transparent .2mm);background-size:4mm 4mm;outline-color:#1d4f9c}
+.v-7 .band{background:transparent;border-bottom:.3mm solid var(--line)}
+.v-7 .stub,.v-7 .info{background:transparent}
+.v-7 .front .stub,.v-7 .back .stub{border-color:var(--line)}
+.v-7 .lbl{font-family:var(--mono);letter-spacing:.06em;font-weight:500}
+.v-7 .iata{font-weight:700;color:#fff}
+.v-7 .val{font-weight:700}
+.v-7 .status{border:.3mm dashed #fff;background:transparent;color:#fff;border-radius:0}
+.v-7 .foot{background:transparent;border-top:.3mm solid var(--line);color:#fff}
+.v-7 .back .letter{background:#f4f8ff;--line:#b8c6de}
+"""),
+
+    ("8", "Himmel", """
+.v-8 .pass{--ink:#0d2238;--muted:#577089;--line:#cfe0ee;--paper:#ffffff;--accent:#2a7fc9;--accent-soft:#eef6fc;--accent-deep:#0f3d6e;--sun:#2a7fc9;--sun-soft:#eef6fc;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif}
+.v-8 .band{background:linear-gradient(100deg,#0f3d6e 0%,#2a7fc9 55%,#8fc8f0 100%)}
+.v-8 .stub .band{background:linear-gradient(100deg,#2a7fc9,#8fc8f0)}
+.v-8 .band .ic{fill:#fff}
+.v-8 .band .kind b{color:#fff}
+.v-8 .body{background:linear-gradient(#eef6fc,#ffffff 45%)}
+.v-8 .iata,.v-8 .val{font-weight:700}
+.v-8 .iata{color:#0f3d6e}
+.v-8 .status{color:#0f3d6e;border-color:#8fc8f0;background:#ffffff}
+.v-8 .stub,.v-8 .info{background:#f7fbfe}
 """),
 ]
 
-ALL_VARIANT_CSS = COMMON + "".join(v[3] for v in VARIANTS)
+ALL_VARIANT_CSS = COMMON + "".join(v[2] for v in VARIANTS)
 
 SCRIPT = """<script>
 (function(){
@@ -191,11 +236,12 @@ html,body{background:var(--g-bg);color:var(--g-fg);font-family:var(--g-body)}
 header.top h1{font:800 clamp(28px,5vw,40px)/1.1 var(--g-display);margin:0 0 8px;text-wrap:balance}
 header.top p{margin:0;color:var(--g-muted);font-size:16px;line-height:1.5;max-width:68ch}
 nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
-nav.jump a{font:600 14px/1 var(--g-body);color:var(--g-fg);text-decoration:none;border:1px solid var(--g-line);border-radius:999px;padding:9px 14px;background:var(--g-card)}
+nav.jump a{min-width:40px;text-align:center;font:700 15px/1 var(--g-body);color:var(--g-fg);text-decoration:none;border:1px solid var(--g-line);border-radius:999px;padding:9px 14px;background:var(--g-card)}
 nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
 .variant{margin-top:28px;padding-top:22px;border-top:1px solid var(--g-line)}
-.variant h2{font:800 24px/1.2 var(--g-display);margin:0 0 4px;display:flex;gap:12px;align-items:baseline}
-.variant h2 span{font:700 13px/1 var(--g-body);letter-spacing:.12em;color:var(--g-accent)}
+.variant h2{font:800 34px/1 var(--g-display);margin:0 0 14px;display:flex;gap:12px;align-items:baseline}
+.variant h2 a.pdf{margin-left:auto;font:600 13px/1 var(--g-body);color:var(--g-muted)}
+.variant h2 span{font:600 15px/1 var(--g-body);letter-spacing:.1em;text-transform:uppercase;color:var(--g-muted)}
 .variant p{margin:0 0 16px;color:var(--g-muted);font-size:15px;max-width:68ch}
 .variant p.dl{margin:-6px 0 16px}
 .dl a{color:var(--g-accent);font-weight:600}
@@ -211,18 +257,16 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
 
 
 def gallery():
-    nav = "".join(f'<a href="#v-{k}">Variante {k} · {n}</a>' for k, n, _, _ in VARIANTS)
+    nav = "".join(f'<a href="#v-{k}">{k}</a>' for k, n, _ in VARIANTS)
     blocks = ""
-    for k, n, d, _ in VARIANTS:
+    for k, n, _ in VARIANTS:
         blocks += f"""
 <section class="variant v-{k}" id="v-{k}">
-  <h2><span>VARIANTE {k}</span>{n}</h2>
-  <p>{d}</p>
-  <p class="dl"><a href="boarding-pass-{k}.pdf">PDF von Variante {k} zum Drucken</a></p>
+  <h2>{k}<span>{n}</span><a class="pdf" href="boarding-pass-{k}.pdf">PDF</a></h2>
   <div class="sides">
-    <div class="side"><small>Vorderseite</small><div class="frame">
+    <div class="side"><div class="frame">
 {front}    </div></div>
-    <div class="side"><small>Rückseite</small><div class="frame">
+    <div class="side"><div class="frame">
 {back}    </div></div>
   </div>
 </section>"""
@@ -239,8 +283,7 @@ def gallery():
 <body>
 <div class="wrap">
 <header class="top">
-  <h1>Boarding Pass Varianten</h1>
-  <p>Fünf Designs mit demselben Inhalt für Benjamins Kunstflug. Welche Nummer gefällt dir am besten? Zum Drucken gibt es für jede Variante ein eigenes PDF mit Vorder- und Rückseite.</p>
+  <h1>Boarding Pass</h1>
   <nav class="jump">{nav}</nav>
 </header>
 {blocks}
@@ -251,7 +294,7 @@ def gallery():
 """
 
 
-for k, n, _, _ in VARIANTS:
+for k, n, _ in VARIANTS:
     (HERE / f"boarding-pass-{k}.html").write_text(print_file(k, n))
 (HERE / "index.html").write_text(gallery())
 print("built", [v[0] for v in VARIANTS])

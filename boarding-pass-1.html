@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Boarding Pass 1 Teal</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Archivo:wght@400;500;700;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&family=Righteous&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Archivo:wght@400;500;700;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#0f1420; --muted:#4a5263; --line:#c9ceda; --paper:#ffffff;
@@ -114,12 +114,12 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .loop .track{stroke:var(--accent-deep)}
 .barcode rect{fill:var(--ink)}
 
-.v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#d2232a;--sun-soft:transparent;
+.v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#2346a0;--sun-soft:transparent;
   --display:"IBM Plex Mono",ui-monospace,monospace;--body:"IBM Plex Mono",ui-monospace,monospace;--mono:"IBM Plex Mono",ui-monospace,monospace;border-radius:2mm}
 .v-2 .band{background:var(--paper);color:var(--ink);height:13mm;border-bottom:.6mm solid var(--ink)}
 .v-2 .brand{font-weight:700;font-size:11pt}
 .v-2 .brand small{opacity:1;color:var(--muted);font-weight:500}
-.v-2 .band .kind b{color:var(--sun);font-weight:700}
+.v-2 .band .kind b{color:var(--ink);font-weight:700}
 .v-2 .lbl{font-weight:500;letter-spacing:.08em;font-size:5.4pt}
 .v-2 .val{font-weight:700;font-size:9.5pt}
 .v-2 .grid .val{font-size:8.6pt}
@@ -133,7 +133,7 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-2 .front .stub,.v-2 .back .stub{border-color:var(--ink)}
 .v-2 .info h3{font-weight:700}
 
-.v-3 .pass{--ink:#111111;--muted:#6b6b6b;--line:#d6d6d6;--paper:#ffffff;--accent:#e30613;--accent-soft:#111111;--accent-deep:#111111;--sun:#e30613;--sun-soft:#e30613;
+.v-3 .pass{--ink:#111111;--muted:#6b6b6b;--line:#d6d6d6;--paper:#ffffff;--accent:#1f3bd6;--accent-soft:#111111;--accent-deep:#111111;--sun:#1f3bd6;--sun-soft:#1f3bd6;
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;--body:"Archivo","Helvetica Neue",Arial,sans-serif;border-radius:0;outline-color:#cfcfcf}
 .v-3 .band{background:var(--paper);color:var(--ink);height:14mm;border-bottom:.4mm solid var(--ink)}
 .v-3 .brand{font-weight:900}
@@ -151,8 +151,8 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-3 .grid{border-top:.4mm solid var(--ink)}
 .v-3 .foot{background:var(--ink);color:#fff}
 .v-3 .stub,.v-3 .info{background:var(--paper)}
-.v-3 .front .stub,.v-3 .back .stub{border-style:solid;border-width:0 0 0 .3mm;border-color:var(--ink)}
-.v-3 .back .stub{border-width:0 .3mm 0 0}
+.v-3 .front .stub{border-style:solid;border-width:0 0 0 .3mm;border-color:var(--ink)}
+.v-3 .back .stub{border-style:solid;border-width:0 .3mm 0 0;border-color:var(--ink)}
 .v-3 .info h3{color:var(--accent)}
 
 .v-4 .pass{--ink:#f2ede2;--muted:#9fa9bc;--line:#33435d;--paper:#0f1b2e;--accent:#0a1422;--accent-soft:#0a1422;--accent-deep:#e6c27c;--sun:#e6c27c;--sun-soft:transparent;
@@ -168,18 +168,57 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-4 .info h3{color:var(--sun)}
 .v-4 .back .letter{background:#f6f2ea;--line:#cfc6b4}
 
-.v-5 .pass{--ink:#2b1d16;--muted:#7a6457;--line:#e0d3c7;--paper:#fffdf9;--accent:#c4421a;--accent-soft:#fbeadf;--accent-deep:#8f2d10;--sun:#f2a922;--sun-soft:#fff1d6;
-  --display:"Righteous","Segoe UI",system-ui,sans-serif;--body:"Work Sans","Segoe UI",system-ui,sans-serif;border-radius:7mm}
-.v-5 .band{position:relative;padding-bottom:3mm}
-.v-5 .band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3.2mm;background:linear-gradient(#e8742a 0 33%,#f2a922 33% 66%,#6b3a1f 66%)}
-.v-5 .brand,.v-5 .val,.v-5 .iata,.v-5 .band .kind b{font-weight:400}
-.v-5 .band .kind b{color:#ffd27a}
-.v-5 .brand small{color:#fff;opacity:.9;font-family:var(--body);font-weight:600}
-.v-5 .iata{color:var(--accent)}
-.v-5 .lbl{font-family:var(--body);color:var(--accent-deep)}
-.v-5 .status{color:var(--accent-deep);border-color:var(--sun);border-radius:4mm}
-.v-5 .stub,.v-5 .info{background:#fff7ee}
-.v-5 .info h3{color:var(--accent)}
+.v-5 .pass{--ink:#e4eef2;--muted:#7d929f;--line:#26363f;--paper:#10171c;--accent:#0a0f13;--accent-soft:#0a0f13;--accent-deep:#6fe3ff;--sun:#6fe3ff;--sun-soft:transparent;
+  --display:"JetBrains Mono",ui-monospace,monospace;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif;outline-color:#10171c}
+.v-5 .band{background:var(--accent);color:var(--ink);border-bottom:.3mm solid var(--sun)}
+.v-5 .body{background-image:linear-gradient(rgba(111,227,255,.07) .2mm,transparent .2mm),linear-gradient(90deg,rgba(111,227,255,.07) .2mm,transparent .2mm);background-size:5mm 5mm}
+.v-5 .val{font-weight:700}
+.v-5 .iata{font-weight:700;color:var(--sun);font-size:23pt}
+.v-5 .lbl{color:var(--sun);opacity:.8}
+.v-5 .status{color:var(--sun);border-color:var(--sun);background:transparent;border-radius:0}
+.v-5 .foot{color:var(--ink)}
+.v-5 .stub,.v-5 .info{background:#0d1317}
+.v-5 .info h3{color:var(--sun)}
+.v-5 .back .letter{background:#eef3f5;--line:#b9c6cd}
+
+.v-6 .pass{--ink:#14213d;--muted:#5a6680;--line:#d3d9e6;--paper:#ffffff;--accent:#14213d;--accent-soft:#14213d;--accent-deep:#14213d;--sun:#4cc9f0;--sun-soft:#eaf8fd;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Barlow","Segoe UI",system-ui,sans-serif}
+.v-6 .band{background:linear-gradient(115deg,#14213d 0 56%,#4cc9f0 56% 59.5%,#14213d 59.5% 61.5%,#2f6fe4 61.5% 67%,#14213d 67%)}
+.v-6 .stub .band,.v-6 .back .main .band{background:linear-gradient(115deg,#14213d 0 70%,#4cc9f0 70% 76%,#14213d 76% 79%,#2f6fe4 79% 88%,#14213d 88%)}
+.v-6 .brand,.v-6 .val,.v-6 .iata,.v-6 .band .kind b{font-style:italic;font-weight:800}
+.v-6 .iata{font-size:31pt;letter-spacing:0;color:var(--ink)}
+.v-6 .val{font-size:11.5pt}
+.v-6 .grid .val{font-size:10.5pt}
+.v-6 .pax .val{font-size:17pt}
+.v-6 .lbl{font-family:var(--body);font-weight:600}
+.v-6 .status{color:var(--ink);border-color:var(--sun);background:var(--sun-soft);font-family:var(--body)}
+.v-6 .foot{color:#fff}
+.v-6 .stub,.v-6 .info{background:#f6f8fc}
+
+.v-7 .pass{--ink:#f4f8ff;--muted:#bccdec;--line:rgba(255,255,255,.35);--paper:#1d4f9c;--accent:#1d4f9c;--accent-soft:transparent;--accent-deep:#ffffff;--sun:#ffffff;--sun-soft:transparent;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+  background-image:linear-gradient(rgba(255,255,255,.09) .2mm,transparent .2mm),linear-gradient(90deg,rgba(255,255,255,.09) .2mm,transparent .2mm);background-size:4mm 4mm;outline-color:#1d4f9c}
+.v-7 .band{background:transparent;border-bottom:.3mm solid var(--line)}
+.v-7 .stub,.v-7 .info{background:transparent}
+.v-7 .front .stub,.v-7 .back .stub{border-color:var(--line)}
+.v-7 .lbl{font-family:var(--mono);letter-spacing:.06em;font-weight:500}
+.v-7 .iata{font-weight:700;color:#fff}
+.v-7 .val{font-weight:700}
+.v-7 .status{border:.3mm dashed #fff;background:transparent;color:#fff;border-radius:0}
+.v-7 .foot{background:transparent;border-top:.3mm solid var(--line);color:#fff}
+.v-7 .back .letter{background:#f4f8ff;--line:#b8c6de}
+
+.v-8 .pass{--ink:#0d2238;--muted:#577089;--line:#cfe0ee;--paper:#ffffff;--accent:#2a7fc9;--accent-soft:#eef6fc;--accent-deep:#0f3d6e;--sun:#2a7fc9;--sun-soft:#eef6fc;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif}
+.v-8 .band{background:linear-gradient(100deg,#0f3d6e 0%,#2a7fc9 55%,#8fc8f0 100%)}
+.v-8 .stub .band{background:linear-gradient(100deg,#2a7fc9,#8fc8f0)}
+.v-8 .band .ic{fill:#fff}
+.v-8 .band .kind b{color:#fff}
+.v-8 .body{background:linear-gradient(#eef6fc,#ffffff 45%)}
+.v-8 .iata,.v-8 .val{font-weight:700}
+.v-8 .iata{color:#0f3d6e}
+.v-8 .status{color:#0f3d6e;border-color:#8fc8f0;background:#ffffff}
+.v-8 .stub,.v-8 .info{background:#f7fbfe}
 </style>
 </head>
 <body class="v-1">
