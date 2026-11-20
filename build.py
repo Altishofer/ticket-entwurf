@@ -679,8 +679,33 @@ def ticket_file(key):
     return html.replace('src="hb-mad.png"', f'src="{img}"').replace('href="hb-mad.png"', f'href="{img}"')
 
 
+SHOW_CSS = """
+/* Bild zum Teilen: Pässe als Objekte auf ruhigem Grund */
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:radial-gradient(120% 90% at 50% 40%,#f3f5f9 0%,#dfe4ec 70%,#d3d9e3 100%)}
+.page{position:absolute;width:190mm;height:86mm;border-radius:5mm;overflow:hidden;transform-origin:50% 50%;
+  box-shadow:0 2px 4px rgba(15,25,60,.10),0 18px 40px rgba(15,25,60,.22)}
+.page .pass{left:0;top:0;outline:0}
+.duo .page.f{left:50%;top:50%;z-index:2;transform:translate(-50%,-104%) rotate(-3deg)}
+.duo .page.b{left:50%;top:50%;z-index:1;transform:translate(-50%,6%) rotate(2.2deg)}
+.solo .page.f{left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg) scale(.96)}
+"""
+
+
+def show_file(key, mode):
+    html = ticket_file(key)
+    html = html.replace("{TICKET_CSS}", "")
+    html = html.replace(TICKET_CSS, SHOW_CSS)
+    html = html.replace('<body class="v-' + key + '">', '<body class="v-' + key + ' ' + mode + '">', 1)
+    html = html.replace('<div class="page">', '<div class="page f">', 1).replace('<div class="page">', '<div class="page b">', 1)
+    if mode == "solo":
+        html = re.sub(r'<div class="page b">.*?</div>\n<script>', '<script>', html, count=1, flags=re.S)
+    return html
+
+
 (HERE.parent / "druck").mkdir(exist_ok=True)
 (HERE.parent / "druck" / "boarding-pass-ticket.html").write_text(ticket_file("14r"))
+(HERE.parent / "druck" / "teilen-beide.html").write_text(show_file("14r", "duo"))
 
 (HERE / "druck").mkdir(exist_ok=True)
 (HERE / "druck" / "boarding-pass-druck.html").write_text(ready_file("14r").replace('src="hb-mad.png"', 'src="../hb-mad.png"'))
