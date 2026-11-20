@@ -559,7 +559,7 @@ CHECKIN = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="refresh" content="4;url={RICKROLL}">
+<meta http-equiv="refresh" content="11;url={RICKROLL}">
 <title>Online Check-in · PHD 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -577,7 +577,7 @@ dl{{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 22px}}
 dt{{font:700 11px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}}
 dd{{margin:4px 0 0;font-weight:700}}
 .bar{{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}}
-.bar i{{display:block;height:100%;width:8%;background:var(--accent);border-radius:99px;transition:width 3.2s ease-in-out}}
+.bar i{{display:block;height:100%;width:8%;background:var(--accent);border-radius:99px;transition:width 7s cubic-bezier(.3,.1,.3,1)}}
 .st{{margin:12px 0 0;color:var(--muted);font-size:14px}}
 </style>
 </head>
@@ -598,8 +598,9 @@ dd{{margin:4px 0 0;font-weight:700}}
 </main>
 <script>
 requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById("b").style.width = "100%"));
-setTimeout(() => {{ document.getElementById("t").textContent = "Bordkarte wird geöffnet …"; document.getElementById("s").textContent = "Bestätigt ✓"; }}, 2200);
-setTimeout(() => location.replace("{RICKROLL}"), 3300);
+setTimeout(() => {{ document.getElementById("s").textContent = "Bestätigt ✓"; document.getElementById("t").textContent = "Sitzplatz 1A bestätigt."; }}, 3500);
+setTimeout(() => {{ document.getElementById("t").textContent = "Bordkarte wird geöffnet …"; }}, 6000);
+setTimeout(() => location.replace("{RICKROLL}"), 8000);
 </script>
 </body>
 </html>
