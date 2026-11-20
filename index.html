@@ -109,6 +109,9 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
   .sheet-label{display:none}
 }
 
+.body{position:relative}
+.body > *:not(.wm){position:relative}
+.wm{position:absolute;right:3mm;top:13mm;width:92mm;height:auto;fill:var(--accent-deep);opacity:.07;pointer-events:none}
 .pass{color:var(--ink)}
 .band{color:#fff}
 .ic{fill:var(--sun)}
@@ -221,48 +224,36 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-8 .status{color:#0f3d6e;border-color:#8fc8f0;background:#ffffff}
 .v-8 .stub,.v-8 .info{background:#f7fbfe}
 
-/* Layout: one column of variants; each shows front and back of the pass as a physical object */
+/* Layout: one column of variants; each pass scales to its column, tap opens it full screen */
 :root{
-  --g-bg:#e7eaef; --g-fg:#141821; --g-muted:#535b6a; --g-card:#f6f7f9; --g-line:#cdd2db; --g-accent:#2c5f6b;
-  --g-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; --g-body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --g-bg:#e7eaef; --g-fg:#141821; --g-line:#cdd2db; --g-accent:#2c5f6b; --g-veil:rgba(12,15,20,.92);
+  --g-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--g-bg:#14171d;--g-fg:#eceef2;--g-muted:#a3aab7;--g-card:#1c2028;--g-line:#2e3440;--g-accent:#8cc3cf;color-scheme:dark}}
-:root[data-theme="dark"]{--g-bg:#14171d;--g-fg:#eceef2;--g-muted:#a3aab7;--g-card:#1c2028;--g-line:#2e3440;--g-accent:#8cc3cf;color-scheme:dark}
-html,body{background:var(--g-bg);color:var(--g-fg);font-family:var(--g-body)}
-.wrap{max-width:1560px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 48px}
-header.top h1{font:800 clamp(28px,5vw,40px)/1.1 var(--g-display);margin:0 0 8px;text-wrap:balance}
-header.top p{margin:0;color:var(--g-muted);font-size:16px;line-height:1.5;max-width:68ch}
-nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
-nav.jump a{min-width:40px;text-align:center;font:700 15px/1 var(--g-body);color:var(--g-fg);text-decoration:none;border:1px solid var(--g-line);border-radius:999px;padding:9px 14px;background:var(--g-card)}
-nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
-.variant{margin-top:28px;padding-top:22px;border-top:1px solid var(--g-line)}
-.variant h2{font:800 34px/1 var(--g-display);margin:0 0 14px;display:flex;gap:12px;align-items:baseline}
-.variant h2 a.pdf{margin-left:auto;font:600 13px/1 var(--g-body);color:var(--g-muted)}
-.variant h2 span{font:600 15px/1 var(--g-body);letter-spacing:.1em;text-transform:uppercase;color:var(--g-muted)}
-.variant p{margin:0 0 16px;color:var(--g-muted);font-size:15px;max-width:68ch}
-.variant p.dl{margin:-6px 0 16px}
-.dl a{color:var(--g-accent);font-weight:600}
-.sides{display:flex;flex-wrap:wrap;gap:18px 24px}
-.side{min-width:0}
-.side small{display:block;font:600 12px/1 var(--g-body);letter-spacing:.1em;text-transform:uppercase;color:var(--g-muted);margin-bottom:8px}
-.frame{position:relative;width:190mm;height:86mm;zoom:.95}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--g-bg:#14171d;--g-fg:#eceef2;--g-line:#2e3440;--g-accent:#8cc3cf;color-scheme:dark}}
+:root[data-theme="dark"]{--g-bg:#14171d;--g-fg:#eceef2;--g-line:#2e3440;--g-accent:#8cc3cf;color-scheme:dark}
+html,body{background:var(--g-bg);color:var(--g-fg)}
+body{-webkit-tap-highlight-color:transparent}
+.wrap{max-width:1560px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:max(20px, env(safe-area-inset-top, 0px)) max(40px, env(safe-area-inset-bottom, 0px))}
+.variant{padding-block:22px 26px;border-top:1px solid var(--g-line)}
+.variant:first-child{border-top:0;padding-top:4px}
+.variant h2{font:800 clamp(22px,4.5vw,30px)/1 var(--g-display);margin:0 0 14px;letter-spacing:-.01em}
+.sides{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,620px),1fr));gap:12px 22px}
+.fit{position:relative;width:100%;height:calc((100vw - 32px) * .4526);cursor:zoom-in;border-radius:10px}
+.fit:focus-visible{outline:3px solid var(--g-accent);outline-offset:4px}
+.fit .frame{position:absolute;left:0;top:0;width:190mm;height:86mm;transform-origin:0 0}
 .frame .pass{left:0;top:0;box-shadow:0 6px 22px rgba(0,0,0,.18)}
-@media (max-width:1560px){.frame{zoom:.9}}
-@media (max-width:800px){.frame{zoom:.62}}
-@media (max-width:520px){.frame{zoom:.44}}
+#lb{position:fixed;inset:0;z-index:20;background:var(--g-veil);cursor:zoom-out}
+#lb .frame{position:absolute;left:50%;top:50%;width:190mm;height:86mm}
+@media (prefers-reduced-motion:no-preference){#lb{animation:fade .18s ease-out}@keyframes fade{from{opacity:0}}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <h1>Boarding Pass</h1>
-  <nav class="jump"><a href="#v-1">1</a><a href="#v-2">2</a><a href="#v-3">3</a><a href="#v-4">4</a><a href="#v-5">5</a><a href="#v-6">6</a><a href="#v-7">7</a><a href="#v-8">8</a></nav>
-</header>
+<main class="wrap">
 
-<section class="variant v-1" id="v-1">
-  <h2>1<span>Teal</span><a class="pdf" href="boarding-pass-1.pdf">PDF</a></h2>
+<section class="variant v-1" id="a">
+  <h2>Variante A</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante A Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -272,7 +263,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -335,7 +338,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante A Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -371,10 +374,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-2" id="v-2">
-  <h2>2<span>Thermodruck</span><a class="pdf" href="boarding-pass-2.pdf">PDF</a></h2>
+<section class="variant v-2" id="b">
+  <h2>Variante B</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante B Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -384,7 +387,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -447,7 +462,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante B Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -483,10 +498,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-3" id="v-3">
-  <h2>3<span>Swiss</span><a class="pdf" href="boarding-pass-3.pdf">PDF</a></h2>
+<section class="variant v-3" id="c">
+  <h2>Variante C</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante C Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -496,7 +511,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -559,7 +586,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante C Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -595,10 +622,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-4" id="v-4">
-  <h2>4<span>Nachtflug</span><a class="pdf" href="boarding-pass-4.pdf">PDF</a></h2>
+<section class="variant v-4" id="d">
+  <h2>Variante D</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante D Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -608,7 +635,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -671,7 +710,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante D Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -707,10 +746,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-5" id="v-5">
-  <h2>5<span>Cockpit</span><a class="pdf" href="boarding-pass-5.pdf">PDF</a></h2>
+<section class="variant v-5" id="e">
+  <h2>Variante E</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante E Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -720,7 +759,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -783,7 +834,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante E Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -819,10 +870,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-6" id="v-6">
-  <h2>6<span>Lackierung</span><a class="pdf" href="boarding-pass-6.pdf">PDF</a></h2>
+<section class="variant v-6" id="f">
+  <h2>Variante F</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante F Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -832,7 +883,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -895,7 +958,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante F Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -931,10 +994,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-7" id="v-7">
-  <h2>7<span>Blaupause</span><a class="pdf" href="boarding-pass-7.pdf">PDF</a></h2>
+<section class="variant v-7" id="g">
+  <h2>Variante G</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante G Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -944,7 +1007,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1007,7 +1082,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante G Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -1043,10 +1118,10 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-<section class="variant v-8" id="v-8">
-  <h2>8<span>Himmel</span><a class="pdf" href="boarding-pass-8.pdf">PDF</a></h2>
+<section class="variant v-8" id="h">
+  <h2>Variante H</h2>
   <div class="sides">
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante H Vorderseite gross anzeigen"><div class="frame">
   <div class="pass front">
     <div class="main">
       <div class="band">
@@ -1056,7 +1131,19 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body">
+      <div class="body"><svg class="wm" viewBox="0 0 240 70" aria-hidden="true">
+<path d="M14 34 L8 9 Q9 5 15 6 L36 30 Z"/>
+<path d="M12 37 L46 36.5 L42 40.5 L11 40.5 Z"/>
+<path d="M18 33.5 L64 30 L122 26.5 Q152 22.5 170 24 L198 27 Q207 28 211 32 L214 36 Q207 41.5 197 42.5 L152 44.5 L92 42.5 L30 40.5 Z"/>
+<path d="M128 26 Q138 10.5 162 11.5 Q181 13 187 25 Z" opacity=".75"/>
+<path d="M118 42.5 L178 41 L180 45.5 L116 47 Z"/>
+<path d="M214 29.5 Q226 34.5 214 40.5 Z"/>
+<rect x="223" y="11" width="2.6" height="48" rx="1.3"/>
+<path d="M166 44 L175 57 L180 57 L172 44 Z"/>
+<ellipse cx="178" cy="59.5" rx="8" ry="4"/>
+<circle cx="15" cy="44" r="2.2"/>
+</svg>
+
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1119,7 +1206,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div>
   </div>
     </div></div>
-    <div class="side"><div class="frame">
+    <div class="fit" tabindex="0" role="button" aria-label="Variante H Rückseite gross anzeigen"><div class="frame">
   <div class="pass back">
     <div class="info">
       <h3>Check-in</h3>
@@ -1155,7 +1242,7 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     </div></div>
   </div>
 </section>
-</div>
+</main>
 <script>
 (function(){
   const s = "DR-HUNKELER-HBMAD-2026";
@@ -1178,6 +1265,42 @@ nav.jump a:focus-visible{outline:2px solid var(--g-accent);outline-offset:2px}
     }
     el.innerHTML = html;
   });
+})();
+</script>
+<script>
+(function(){
+  const fits = [...document.querySelectorAll(".fit")];
+  function layout(){
+    for (const f of fits) {
+      const fr = f.firstElementChild, s = f.clientWidth / fr.offsetWidth;
+      fr.style.transform = "scale(" + s + ")";
+      f.style.height = (fr.offsetHeight * s) + "px";
+    }
+  }
+  layout();
+  addEventListener("resize", layout);
+  if (document.fonts) document.fonts.ready.then(layout);
+
+  let lb = null, cur = null;
+  function close(){ if (lb) { lb.remove(); lb = null; cur = null; document.body.style.overflow = ""; } }
+  function open(f){
+    close(); cur = f;
+    const fr = f.firstElementChild.cloneNode(true);
+    lb = document.createElement("div"); lb.id = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+    lb.className = [...f.closest(".variant").classList].filter(c => c.startsWith("v-")).join(" ");
+    lb.appendChild(fr); document.body.appendChild(lb); document.body.style.overflow = "hidden";
+    const vw = innerWidth - 24, vh = innerHeight - 24, w = fr.offsetWidth, h = fr.offsetHeight;
+    const turn = vh > vw * 1.15;
+    const s = turn ? Math.min(vw / h, vh / w) : Math.min(vw / w, vh / h);
+    fr.style.transform = "translate(-50%,-50%)" + (turn ? " rotate(90deg)" : "") + " scale(" + s + ")";
+    lb.addEventListener("click", close);
+  }
+  for (const f of fits) {
+    f.addEventListener("click", () => open(f));
+    f.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(f); } });
+  }
+  addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  addEventListener("resize", () => { if (cur) open(cur); });
 })();
 </script>
 </body>
