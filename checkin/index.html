@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="4;url=https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+<title>Online Check-in · PHD 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef0f4;--card:#ffffff;--ink:#0f1420;--muted:#4a5263;--line:#d5d9e1;--accent:#2c5f6b;--soft:#e6f0f1}
+@media (prefers-color-scheme: dark){:root{--bg:#12161c;--card:#1b2029;--ink:#eceef2;--muted:#a3aab7;--line:#2e3440;--accent:#8cc3cf;--soft:#1f2c31;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:16px/1.5 "Instrument Sans","Segoe UI",system-ui,sans-serif;padding:24px max(16px, env(safe-area-inset-left, 0px))}
+.card{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.top{background:var(--accent);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;font:700 13px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.top b{font:800 20px/1 "Bricolage Grotesque",sans-serif;letter-spacing:0}
+.in{padding:22px}
+.route{display:flex;justify-content:space-between;align-items:baseline;font:800 34px/1 "Bricolage Grotesque",sans-serif;margin:4px 0 18px}
+.route span{font:600 24px/1 "Instrument Sans",sans-serif;color:var(--muted)}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 22px}
+dt{font:700 11px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+dd{margin:4px 0 0;font-weight:700}
+.bar{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;width:8%;background:var(--accent);border-radius:99px;transition:width 3.2s ease-in-out}
+.st{margin:12px 0 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="top">Online Check-in <b>PHD 2026</b></div>
+  <div class="in">
+    <div class="route">ETH <span>→</span> LFGB</div>
+    <dl>
+      <div><dt>Passagier</dt><dd>Dr. Benjamin Hunkeler</dd></div>
+      <div><dt>Sitz</dt><dd>1A · Doctor</dd></div>
+      <div><dt>Flugzeug</dt><dd>XtremeAir XA42</dd></div>
+      <div><dt>Status</dt><dd id="s">Prüfung läuft</dd></div>
+    </dl>
+    <div class="bar"><i id="b"></i></div>
+    <p class="st" id="t">Sitzplatz wird bestätigt …</p>
+  </div>
+</main>
+<script>
+requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById("b").style.width = "100%"));
+setTimeout(() => { document.getElementById("t").textContent = "Bordkarte wird geöffnet …"; document.getElementById("s").textContent = "Bestätigt ✓"; }, 2200);
+setTimeout(() => location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 3300);
+</script>
+</body>
+</html>
