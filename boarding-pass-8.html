@@ -108,6 +108,9 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
   .sheet-label{display:none}
 }
 
+.letter{position:relative}
+.sig{display:none;position:absolute;right:7mm;bottom:5mm;width:44mm;height:11mm;opacity:.35}
+.sig .track{stroke:var(--accent-deep)}
 .write span{border-bottom:0}
 .body{position:relative}
 .rp{display:none;height:13mm;width:auto;max-width:100%;margin:0 auto;fill:var(--accent-deep)}
@@ -133,6 +136,7 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-14 .sp{display:block}.v-14 .stub .qrbox{margin-top:0}.v-14 .stub .inner > :is(:nth-child(3),:nth-child(4)){display:none}
 .v-14o .sp{display:block}.v-14o .stub .qrbox{margin-top:0}.v-14o .stub .inner > :is(:nth-child(3),:nth-child(4)){display:none}
 .v-14p .sp{display:block}.v-14p .stub .qrbox{margin-top:0}.v-14p .stub .inner > :is(:nth-child(3),:nth-child(4)){display:none}
+.v-14r .sp{display:block}.v-14r .stub .qrbox{margin-top:0}.v-14r .stub .inner > :is(:nth-child(3),:nth-child(4)){display:none}
 .v-17 .sp{display:block}.v-17 .stub .qrbox{margin-top:0}.v-17 .stub .inner > :is(:nth-child(3),:nth-child(4)){display:none}
 
 .v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#2346a0;--sun-soft:transparent;
@@ -384,7 +388,33 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-14p .route .ic{fill:#1b2a78}
 .v-14p .status{color:#1b2a78;border-color:#1b2a78;background:#fff}
 .v-14p .foot{background:#1b2a78;color:#fff}
-.v-14p .stub,.v-14p .info{background:#f6f7fb}</style>
+.v-14p .stub,.v-14p .info{background:#f6f7fb}
+.v-14r .pass{--ink:#16204f;--muted:#5b6488;--line:#d5d9e6;--paper:#ffffff;--accent:#1b2a78;--accent-soft:#eef0f7;--accent-deep:#1b2a78;--sun:#c9ced8;--sun-soft:#eef0f7;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif}
+.v-14r .band{background:linear-gradient(to top,#1b2a78 0 1.1mm,#ffffff 1.1mm 1.5mm,#1b2a78 1.5mm 2.1mm,#c9ced8 2.1mm 2.5mm,transparent 2.5mm),#1b2a78}
+.v-14r .stub .band .brand{flex-direction:column;align-items:flex-start;gap:0;font-size:12pt}
+.v-14r .stub .band .brand::before{content:"Boarding Pass";font:700 6.5pt/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-bottom:.6mm}
+.v-14r .band .kind b{color:#fff}
+.v-14r .ic{fill:#c9ced8}
+.v-14r .iata,.v-14r .val{font-weight:700}
+.v-14r .iata{color:#1b2a78}
+.v-14r .loop .track{stroke:#1b2a78}
+.v-14r .route .ic{fill:#1b2a78}
+.v-14r .status{color:#1b2a78;border-color:#1b2a78;background:#fff}
+.v-14r .foot{background:#1b2a78;color:#fff}
+.v-14r .stub,.v-14r .info{background:#f6f7fb}
+.v-14r .route{margin:3.6mm 0 2.6mm}
+.v-14r .grid{row-gap:3.4mm;padding-top:3mm}
+
+.v-14r .sig{display:block}
+.v-14r .sig .ic{fill:#1b2a78}
+.v-14r .info{padding:4.5mm 4.5mm 4mm;gap:2.4mm}
+.v-14r .info h3{font-size:8.8pt}
+.v-14r .info ol,.v-14r .info ul{font-size:6.9pt;line-height:1.4;padding-left:4mm}
+.v-14r .info li{margin-bottom:.6mm}
+.v-14r .info .safety{padding-top:2.2mm}
+.v-14r .info > .sub{font-size:6.6pt}
+</style>
 </head>
 <body class="v-8">
 <p class="hint">Variante 8 · Himmel. A4 beidseitig drucken (über die lange Kante wenden), 100 %, nicht «an Seite anpassen». Entlang der Schnittmarken ausschneiden.</p>
@@ -492,7 +522,7 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
         <ul>
           <li>Vorher nur leicht essen.</li>
           <li>Fliegerkombi, Fallschirm und Headset sind dabei.</li>
-          <li>Limite: 1,95 m und 90 kg.</li>
+          <li>An Bord gibt es keinen Reviewer 2.</li>
         </ul>
       </div>
       <div class="sub" style="margin-top:auto">goaviator.com · info@goaviator.com</div>
@@ -505,7 +535,7 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
           <div>Bordnotiz<small>Flug PHD 2026</small></div>
         </div>
       </div>
-      <div class="letter">
+      <div class="letter"><svg class="sig" viewBox="0 0 160 40" aria-hidden="true"><path class="track" d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/><g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g></svg>
         <div class="write" aria-label="Platz für den Brief von Hand"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
     </div>

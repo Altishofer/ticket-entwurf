@@ -54,6 +54,10 @@ def tokenize(markup):
 
 
 front, back = tokenize(front), tokenize(back)
+SIG = ('<svg class="sig" viewBox="0 0 160 40" aria-hidden="true">'
+       '<path class="track" d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>'
+       '<g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g></svg>')
+back = back.replace('<div class="letter">', '<div class="letter">' + SIG, 1)
 
 FONTS = ("https://fonts.googleapis.com/css2?"
          "family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800"
@@ -67,6 +71,9 @@ FONTS = ("https://fonts.googleapis.com/css2?"
          "&display=swap")
 
 COMMON = """
+.letter{position:relative}
+.sig{display:none;position:absolute;right:7mm;bottom:5mm;width:44mm;height:11mm;opacity:.35}
+.sig .track{stroke:var(--accent-deep)}
 .write span{border-bottom:0}
 .body{position:relative}
 .rp{display:none;height:13mm;width:auto;max-width:100%;margin:0 auto;fill:var(--accent-deep)}
@@ -355,6 +362,16 @@ VARIANTS += [
     ("14o", "Original", _base14.replace(_new_band, _old_band).replace(".v-14 ", ".v-14o ")),
     ("14p", "Nur Zierlinien", _base14.replace(".v-14 ", ".v-14p ")),
 ]
+VARIANTS += [("14r", "Neue Rückseite", _css14.replace(".v-14 ", ".v-14r ") + """
+.v-14r .sig{display:block}
+.v-14r .sig .ic{fill:#1b2a78}
+.v-14r .info{padding:4.5mm 4.5mm 4mm;gap:2.4mm}
+.v-14r .info h3{font-size:8.8pt}
+.v-14r .info ol,.v-14r .info ul{font-size:6.9pt;line-height:1.4;padding-left:4mm}
+.v-14r .info li{margin-bottom:.6mm}
+.v-14r .info .safety{padding-top:2.2mm}
+.v-14r .info > .sub{font-size:6.6pt}
+""")]
 OLD_SUBS = {"14o": True, "14p": True}
 SUBS_NEW_TO_OLD = {
     '<div class="sub">vorher Doktorand</div>': '<div class="sub">Upgrade von Doktorand</div>',
@@ -373,13 +390,13 @@ def front_for(k):
     return m
 
 
-LABELS = {"14o": "14 · Original", "14p": "14 · nur Zierlinien", "14": "14 · verfeinert"}
+LABELS = {"14o": "14 · Original", "14p": "14 · nur Zierlinien", "14": "14 · verfeinert", "14r": "14 · neue Rückseite"}
 
 # Auswahl auf der Abstimmungsseite (nach der ersten Runde, 20.11.2026)
-GALLERY = ["14o", "14p", "14"]
+GALLERY = ["14o", "14p", "14", "14r"]
 
 PHOTO = ["15", "16"]
-STUBPHOTO = ["4", "9", "11", "14", "14o", "14p", "17"]
+STUBPHOTO = ["4", "9", "11", "14", "14o", "14p", "14r", "17"]
 PHOTO_CSS = "".join(f".v-{k} .phf{{display:block}}.v-{k} .loop{{display:none}}.v-{k} .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){{display:none}}\n" for k in PHOTO)
 PHOTO_CSS += "".join(f".v-{k} .sp{{display:block}}.v-{k} .stub .qrbox{{margin-top:0}}.v-{k} .stub .inner > :is(:nth-child(3),:nth-child(4)){{display:none}}\n" for k in STUBPHOTO)
 ALL_VARIANT_CSS = COMMON + PHOTO_CSS + "".join(v[2] for v in VARIANTS)
