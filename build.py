@@ -642,6 +642,46 @@ def ready_file(key):
 """
 
 
+TICKET_CSS = """
+/* Nur das Ticket: Vorder- und Rückseite untereinander; Druck je Seite 190 x 86 mm */
+@page{size:190mm 86mm;margin:0}
+html,body{margin:0;background:#e6e9ef}
+body{padding-block:8mm;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.page{width:190mm;height:86mm;position:relative;margin:0 auto 8mm;border-radius:5mm;overflow:hidden;box-shadow:0 6px 24px rgba(15,20,32,.18)}
+.page .pass{left:0;top:0;outline:0}
+@media screen and (max-width:780px){.page{zoom:.5}}
+@media screen and (max-width:420px){.page{zoom:.46}}
+@media print{html,body{background:#fff;padding:0}.page{margin:0;border-radius:0;box-shadow:none;zoom:1;page-break-after:always;break-after:page}}
+"""
+
+
+def ticket_file(key):
+    import base64
+    img = "data:image/png;base64," + base64.b64encode((HERE / "hb-mad.png").read_bytes()).decode()
+    html = f"""<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boarding Pass PHD 2026</title>
+<link href="{FONTS}" rel="stylesheet">
+<style>{style}{ALL_VARIANT_CSS}{TICKET_CSS}</style>
+</head>
+<body class="v-{key}">
+<div class="page">
+{front_for(key)}</div>
+<div class="page">
+{back}</div>
+{SCRIPT}
+</body>
+</html>
+"""
+    return html.replace('src="hb-mad.png"', f'src="{img}"').replace('href="hb-mad.png"', f'href="{img}"')
+
+
+(HERE.parent / "druck").mkdir(exist_ok=True)
+(HERE.parent / "druck" / "boarding-pass-ticket.html").write_text(ticket_file("14r"))
+
 (HERE / "druck").mkdir(exist_ok=True)
 (HERE / "druck" / "boarding-pass-druck.html").write_text(ready_file("14r").replace('src="hb-mad.png"', 'src="../hb-mad.png"'))
 
