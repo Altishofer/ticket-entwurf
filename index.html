@@ -110,8 +110,9 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 }
 
 .body{position:relative}
-.body > *:not(.wm){position:relative}
-.wm{display:none;position:absolute;right:3mm;top:13mm;width:92mm;height:auto;fill:var(--accent-deep);opacity:.08;pointer-events:none}
+.rp{display:none;height:13mm;width:auto;max-width:100%;margin:0 auto;fill:var(--accent-deep)}
+.has-plane .loop{display:none}
+.has-plane .rp{display:block}
 .qrbox{margin-top:auto;display:grid;grid-template-columns:17mm 1fr;gap:2.4mm;align-items:center}
 .qr{background:#fff;border-radius:1.2mm;padding:1.6mm;line-height:0;box-shadow:0 0 0 .2mm rgba(0,0,0,.12)}
 .qr svg{display:block;width:100%;height:auto;fill:#0f1420}
@@ -203,7 +204,9 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-6 .status{color:var(--ink);border-color:var(--sun);background:var(--sun-soft);font-family:var(--body)}
 .v-6 .foot{color:#fff}
 .v-6 .stub,.v-6 .info{background:#f6f8fc}
-.v-6 .wm{display:block;opacity:.07}
+.v-6 .rp,.v-7 .rp,.v-14 .rp{display:block}
+.v-6 .loop,.v-7 .loop,.v-14 .loop{display:none}
+.v-7 .rp{fill:#ffffff}
 
 .v-7 .pass{--ink:#f4f8ff;--muted:#bccdec;--line:rgba(255,255,255,.35);--paper:#1d4f9c;--accent:#1d4f9c;--accent-soft:transparent;--accent-deep:#ffffff;--sun:#ffffff;--sun-soft:transparent;
   --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Space Grotesk","Segoe UI",system-ui,sans-serif;
@@ -217,7 +220,6 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-7 .status{border:.3mm dashed #fff;background:transparent;color:#fff;border-radius:0}
 .v-7 .foot{background:transparent;border-top:.3mm solid var(--line);color:#fff}
 .v-7 .back .letter{background:#f4f8ff;--line:#b8c6de}
-.v-7 .wm{display:block;opacity:.12}
 
 .v-8 .pass{--ink:#0d2238;--muted:#577089;--line:#cfe0ee;--paper:#ffffff;--accent:#2a7fc9;--accent-soft:#eef6fc;--accent-deep:#0f3d6e;--sun:#2a7fc9;--sun-soft:#eef6fc;
   --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif}
@@ -315,7 +317,6 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .v-14 .route .ic{fill:#1b2a78}
 .v-14 .status{color:#1b2a78;border-color:#1b2a78;background:#fff}
 .v-14 .foot{background:#1b2a78;color:#fff}
-.v-14 .wm{display:block;opacity:.09;width:100mm;right:1mm;top:11mm}
 .v-14 .stub,.v-14 .info{background:#f6f7fb}
 
 /* Layout: one column of variants; each pass scales to its column, tap opens it full screen */
@@ -357,18 +358,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -387,6 +377,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -480,18 +481,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -510,6 +500,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -603,18 +604,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -633,6 +623,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -726,18 +727,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -756,6 +746,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -849,18 +850,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -879,6 +869,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -972,18 +973,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1002,6 +992,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1095,18 +1096,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1125,6 +1115,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1218,18 +1219,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1248,6 +1238,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1341,18 +1342,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1371,6 +1361,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1464,18 +1465,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1494,6 +1484,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1587,18 +1588,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1617,6 +1607,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1710,18 +1711,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1740,6 +1730,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1833,18 +1834,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1863,6 +1853,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1956,18 +1957,7 @@ body{-webkit-tap-highlight-color:transparent}
         </div>
         <div class="kind">Boarding Pass<b>PHD 2026</b></div>
       </div>
-      <div class="body"><svg class="wm" viewBox="0 -7 240 75" aria-hidden="true">
-<path d="M7.6 57.6 L21 9 Q24 5.5 36 6.5 L53 27.5 L93 14 L159 9 L207 7 Q222 8 228.5 12 Q222 20.5 207 24 L153.6 32.5 L83 47.6 Z"/>
-<path d="M93 14 Q118 1.5 159 9 L151 14.5 L98 16.5 Z" opacity=".55"/>
-<path d="M5.8 41 L57 32.5 L59 36 L8 45 Z"/>
-<path d="M61 30 L229 25 L229 27.6 L68 33.6 Z"/>
-<path d="M169 32 L173 33 L160 56 L156 55 Z"/>
-<ellipse cx="152" cy="58" rx="13" ry="3.6"/>
-<path d="M30 54 L34 62 L36 62 L33 54 Z"/>
-<circle cx="35" cy="63" r="1.8"/>
-<rect x="213" y="-5" width="2.2" height="56" rx="1.1"/>
-</svg>
-
+      <div class="body">
         <div class="pax">
           <div>
             <div class="lbl">Passagier</div>
@@ -1986,6 +1976,17 @@ body{-webkit-tap-highlight-color:transparent}
             <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
             <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
           </svg>
+<svg class="rp" viewBox="0 0 300 90" aria-hidden="true">
+<path d="M299 39 C296 34 292 31 286.5 30.5 L284 30 C276 26.5 262 25 248 25 L230 25 L128 25.5 C100 27 62 30.5 30 32.6 L14 33.6 L14 36 C40 37.5 80 41.5 120 47 C160 52.5 200 55.5 228 55 C250 54.5 268 51 284 47.6 L286.5 47.4 C292 47 296 44 299 39 Z"/>
+<path d="M230.5 25.4 C223 15 207 8.5 186 8.5 C163 8.5 143 14 126 25.4 Z" opacity=".45"/>
+<path d="M66 31 L50 6.5 Q48 3.5 44 3.5 L24 3.5 Q19.5 3.5 19 8 L16.5 35 L30 32.6 Z"/>
+<path d="M5 34.2 C18 32.2 40 31.9 64 33.2 L64 35.4 C40 36.8 18 37.2 5 36.4 Z"/>
+<path d="M150 52 C175 48.5 210 48 242 50 C245 51.6 245 54.6 242 56 C210 58.4 175 57.5 150 53.6 Z"/>
+<path d="M231 55 L235.5 54.6 L251.5 77.5 L247.5 78.5 Z"/>
+<path d="M237 80.3 C239 75.2 248 74 257.5 74.5 C265.5 75 270.5 77.6 270.5 80.3 C270.5 83.2 264.5 85.4 256 85.4 C246.5 85.4 237 84.2 237 80.3 Z"/>
+<path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
+<path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
+</svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
