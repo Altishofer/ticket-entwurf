@@ -1,3 +1,2 @@
-boarding-pass-*.html
-boarding-pass-*.pdf
-build.py
+*.pdf
+__pycache__/
