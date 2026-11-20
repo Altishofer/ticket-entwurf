@@ -67,6 +67,7 @@ FONTS = ("https://fonts.googleapis.com/css2?"
          "&display=swap")
 
 COMMON = """
+.write span{border-bottom:0}
 .body{position:relative}
 .rp{display:none;height:13mm;width:auto;max-width:100%;margin:0 auto;fill:var(--accent-deep)}
 .sp{display:none;width:100%;height:24mm;object-fit:contain;margin:auto 0 1mm;filter:drop-shadow(0 .5mm .8mm rgba(0,0,0,.2))}
