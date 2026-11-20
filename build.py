@@ -344,11 +344,41 @@ VARIANTS = [
     ("17", "Teal Foto", ""),
 ]
 
+# Vergleich: Variante 14 im Original, nur mit Zierlinien, und ganz verfeinert
+_css14 = next(c for k, n, c in VARIANTS if k == "14")
+_new_band = [l for l in _css14.splitlines() if l.startswith(".v-14 .band{")][0]
+_old_band = ".v-14 .band{position:relative;padding-bottom:3mm;background:linear-gradient(transparent 0 79%,#ffffff 79% 84%,#c9ced8 84%),#1b2a78}"
+_extras = (".v-14 .stub .band .brand", ".v-14 .route{", ".v-14 .grid{")
+_base14 = "\n".join(l for l in _css14.splitlines() if not l.startswith(_extras))
+VARIANTS += [
+    ("14o", "Original", _base14.replace(_new_band, _old_band).replace(".v-14 ", ".v-14o ")),
+    ("14p", "Nur Zierlinien", _base14.replace(".v-14 ", ".v-14p ")),
+]
+OLD_SUBS = {"14o": True, "14p": True}
+SUBS_NEW_TO_OLD = {
+    '<div class="sub">vorher Doktorand</div>': '<div class="sub">Upgrade von Doktorand</div>',
+    '<div class="sub">Wochenende frei</div>': '<div class="sub">Wochenende nach Wahl</div>',
+    '<div class="sub">Selbst am Steuer</div>': '<div class="sub">Selber steuern möglich</div>',
+    '<div class="sub">Volles Programm</div>': '<div class="sub">Volles Kunstflugprogramm</div>',
+    '<div class="sub">Aus dem Cockpit</div>': '<div class="sub">Aufnahme aus dem Cockpit</div>',
+}
+
+
+def front_for(k):
+    m = front
+    if k in OLD_SUBS:
+        for new, old in SUBS_NEW_TO_OLD.items():
+            m = m.replace(new, old)
+    return m
+
+
+LABELS = {"14o": "14 · Original", "14p": "14 · nur Zierlinien", "14": "14 · verfeinert"}
+
 # Auswahl auf der Abstimmungsseite (nach der ersten Runde, 20.11.2026)
-GALLERY = ["14", "4", "17", "7"]
+GALLERY = ["14o", "14p", "14", "4", "17", "7"]
 
 PHOTO = ["15", "16"]
-STUBPHOTO = ["4", "9", "11", "14", "17"]
+STUBPHOTO = ["4", "9", "11", "14", "14o", "14p", "17"]
 PHOTO_CSS = "".join(f".v-{k} .phf{{display:block}}.v-{k} .loop{{display:none}}.v-{k} .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){{display:none}}\n" for k in PHOTO)
 PHOTO_CSS += "".join(f".v-{k} .sp{{display:block}}.v-{k} .stub .qrbox{{margin-top:0}}.v-{k} .stub .inner > :is(:nth-child(3),:nth-child(4)){{display:none}}\n" for k in STUBPHOTO)
 ALL_VARIANT_CSS = COMMON + PHOTO_CSS + "".join(v[2] for v in VARIANTS)
@@ -380,6 +410,7 @@ SCRIPT = """<script>
 
 
 def print_file(key, name):
+    front = front_for(key)
     return f"""<!doctype html>
 <html lang="de-CH">
 <head>
@@ -471,9 +502,10 @@ def gallery():
     blocks = ""
     shown = {k: (k, n, c) for k, n, c in VARIANTS}
     for k, n, _ in (shown[x] for x in GALLERY):
-        letter = k
+        letter = LABELS.get(k, k)
+        front = front_for(k)
         blocks += f"""
-<section class="variant v-{k}" id="v{letter}">
+<section class="variant v-{k}" id="v{k}">
   <h2>{letter}</h2>
   <div class="sides">
     <div class="fit" tabindex="0" role="button" aria-label="{letter} Vorderseite gross anzeigen"><div class="frame">
