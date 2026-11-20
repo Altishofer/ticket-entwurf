@@ -295,7 +295,9 @@ VARIANTS = [
     ("14", "Livery", """
 .v-14 .pass{--ink:#16204f;--muted:#5b6488;--line:#d5d9e6;--paper:#ffffff;--accent:#1b2a78;--accent-soft:#eef0f7;--accent-deep:#1b2a78;--sun:#c9ced8;--sun-soft:#eef0f7;
   --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;--body:"Instrument Sans","Segoe UI",system-ui,sans-serif}
-.v-14 .band{position:relative;padding-bottom:3mm;background:linear-gradient(transparent 0 79%,#ffffff 79% 84%,#c9ced8 84%),#1b2a78}
+.v-14 .band{background:linear-gradient(to top,#1b2a78 0 1.1mm,#ffffff 1.1mm 1.5mm,#1b2a78 1.5mm 2.1mm,#c9ced8 2.1mm 2.5mm,transparent 2.5mm),#1b2a78}
+.v-14 .stub .band .brand{flex-direction:column;align-items:flex-start;gap:0;font-size:12pt}
+.v-14 .stub .band .brand::before{content:"Boarding Pass";font:700 6.5pt/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-bottom:.6mm}
 .v-14 .band .kind b{color:#fff}
 .v-14 .ic{fill:#c9ced8}
 .v-14 .iata,.v-14 .val{font-weight:700}
@@ -305,6 +307,8 @@ VARIANTS = [
 .v-14 .status{color:#1b2a78;border-color:#1b2a78;background:#fff}
 .v-14 .foot{background:#1b2a78;color:#fff}
 .v-14 .stub,.v-14 .info{background:#f6f7fb}
+.v-14 .route{margin:3.6mm 0 2.6mm}
+.v-14 .grid{row-gap:3.4mm;padding-top:3mm}
 """),
     ("15", "HB-MAD", """
 .v-15 .pass{--ink:#1c1418;--muted:#6d5f63;--line:#ddd3cc;--paper:#f4f0ea;--accent:#17121a;--accent-soft:#17121a;--accent-deep:#7d2033;--sun:#7d2033;--sun-soft:transparent;
