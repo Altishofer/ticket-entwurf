@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boarding Pass 2 Thermodruck</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Archivo:wght@400;500;700;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&family=Righteous&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f1420; --muted:#4a5263; --line:#c9ceda; --paper:#ffffff;
+  --accent:#2c5f6b; --accent-soft:#e6f0f1; --accent-deep:#1f4550;
+  --sun:#e9a23b; --sun-soft:#fdf3e2;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --hand:"Caveat",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
+
+/* screen: sheets stacked, scaled to fit */
+.hint{max-width:210mm;margin:24px auto 0;padding:0 16px;font:15px/1.5 var(--body);color:var(--muted)}
+.sheet{width:210mm;height:297mm;margin:16px auto;background:#fff;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+@media screen and (max-width:820px){.sheet{zoom:.45}}
+.sheet-label{position:absolute;top:12mm;left:0;right:0;text-align:center;font:600 10pt var(--body);color:#9aa1ae;letter-spacing:.08em;text-transform:uppercase}
+
+/* pass geometry: 190 x 86 mm, centred on A4 so duplex lines up */
+.pass{position:absolute;left:10mm;top:105.5mm;width:190mm;height:86mm;display:grid;border-radius:5mm;overflow:hidden;background:var(--paper);outline:.2mm solid #d5d9e1}
+.front{grid-template-columns:136mm 54mm}
+.back{grid-template-columns:54mm 136mm}
+
+.marks i{position:absolute;background:#888}
+.marks .h{height:.15mm;width:6mm}
+.marks .v{width:.15mm;height:6mm}
+
+/* crop marks */
+/* perforation between main and stub */
+.front .stub{border-left:.5mm dashed var(--line)}
+.back .stub{border-right:.5mm dashed var(--line)}
+
+/* header band */
+.band{background:var(--accent);color:#fff;height:15mm;display:flex;align-items:center;justify-content:space-between;padding:0 6mm}
+.brand{display:flex;align-items:center;gap:2.5mm;font:800 12pt/1 var(--display);letter-spacing:.01em}
+.brand small{display:block;font:600 6.5pt/1.2 var(--body);letter-spacing:.14em;opacity:.8;text-transform:uppercase;margin-top:1mm}
+.band .kind{text-align:right;font:700 7pt/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.band .kind b{display:block;font:800 13pt/1 var(--display);letter-spacing:.04em;color:var(--sun)}
+
+.main{display:flex;flex-direction:column}
+.body{padding:3.5mm 6mm 0;flex:1;display:flex;flex-direction:column}
+
+.lbl{font:700 5.6pt/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.val{font:800 10.5pt/1.15 var(--display);margin-top:.8mm}
+.sub{font:500 6.3pt/1.25 var(--body);color:var(--muted);margin-top:.6mm}
+
+.pax{display:flex;justify-content:space-between;align-items:flex-end}
+.pax .val{font-size:15pt;letter-spacing:.01em}
+.pax .sub{font-style:italic}
+.status{background:var(--sun-soft);border:.3mm solid var(--sun);color:#8a5a12;border-radius:1.5mm;padding:1mm 2mm;font:700 6.4pt/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+
+.route{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:3mm;margin:2.6mm 0 1.6mm}
+.iata{font:800 25pt/1 var(--display);letter-spacing:-.01em;color:var(--accent-deep)}
+.route .sub{margin-top:.4mm}
+.route .to{text-align:right}
+.loop{width:100%;height:13mm;display:block}
+
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2mm 3mm;border-top:.3mm solid var(--line);padding-top:2.2mm}
+.grid .val{font-size:9.5pt}
+
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:4mm;background:var(--accent-soft);margin-left:-6mm;margin-right:-6mm;padding:1.8mm 6mm;font:500 6.4pt/1.3 var(--body);color:var(--accent-deep)}
+.foot b{font-weight:700}
+
+/* stub */
+.stub{display:flex;flex-direction:column;background:#fbfbfc}
+.stub .band{padding:0 4.5mm}
+.stub .band .brand{font-size:9pt}
+.stub .inner{padding:3.5mm 4.5mm 3mm;display:flex;flex-direction:column;gap:2.2mm;flex:1}
+.stub .pair{display:grid;grid-template-columns:1fr 1fr;gap:2mm}
+.stub .val{font-size:9.5pt}
+.barcode{margin-top:auto}
+.barcode svg{display:block;width:100%;height:11mm}
+.barcode .code{font:500 5.6pt/1 var(--mono);letter-spacing:.12em;text-align:center;margin-top:1mm;color:var(--muted)}
+
+/* back */
+.back .band{justify-content:flex-start}
+.letter{padding:5mm 8mm 4mm 9mm;display:flex;flex-direction:column}
+.letter h2{font:800 12pt/1.1 var(--display);margin:0 0 2.5mm;color:var(--accent-deep)}
+.letter p{font:500 8.4pt/1.5 var(--body);margin:0 0 2mm}
+.sign{margin-top:auto;display:grid;grid-template-columns:1fr auto;align-items:end;gap:4mm}
+.lines{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm 5mm}
+.lines span{border-bottom:.25mm solid var(--line);height:7mm}
+.from{font:500 15pt/1 var(--hand);color:var(--accent);white-space:nowrap}
+.back .letter{flex:1;padding-top:3mm;padding-bottom:5mm}
+.write{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.write span{display:block;border-bottom:.25mm solid var(--line)}
+
+.info{padding:4mm 4.5mm;display:flex;flex-direction:column;gap:2mm;background:#fbfbfc}
+.info h3{font:800 8pt/1 var(--display);margin:0;color:var(--accent-deep);letter-spacing:.02em}
+.info ol,.info ul{margin:0;padding-left:3.6mm;font:500 6.2pt/1.4 var(--body)}
+.info li{margin:0 0 .5mm}
+.info .safety{border-top:.3mm solid var(--line);padding-top:1.8mm}
+
+@page{size:A4 portrait;margin:0}
+@media print{
+  html,body{background:#fff}
+  .hint{display:none}
+  .sheet{margin:0;box-shadow:none;page-break-after:always;zoom:1}
+  .sheet-label{display:none}
+}
+
+.pass{color:var(--ink)}
+.band{color:#fff}
+.ic{fill:var(--sun)}
+.loop .track{stroke:var(--accent-deep)}
+.barcode rect{fill:var(--ink)}
+
+.v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#d2232a;--sun-soft:transparent;
+  --display:"IBM Plex Mono",ui-monospace,monospace;--body:"IBM Plex Mono",ui-monospace,monospace;--mono:"IBM Plex Mono",ui-monospace,monospace;border-radius:2mm}
+.v-2 .band{background:var(--paper);color:var(--ink);height:13mm;border-bottom:.6mm solid var(--ink)}
+.v-2 .brand{font-weight:700;font-size:11pt}
+.v-2 .brand small{opacity:1;color:var(--muted);font-weight:500}
+.v-2 .band .kind b{color:var(--sun);font-weight:700}
+.v-2 .lbl{font-weight:500;letter-spacing:.08em;font-size:5.4pt}
+.v-2 .val{font-weight:700;font-size:9.5pt}
+.v-2 .grid .val{font-size:8.6pt}
+.v-2 .sub{font-size:5.6pt}
+.v-2 .pax .val{font-size:14pt}
+.v-2 .iata{font-weight:700;font-size:23pt;color:var(--ink)}
+.v-2 .status{background:none;border:.45mm solid var(--sun);color:var(--sun);border-radius:.8mm;transform:rotate(-5deg);font-weight:700}
+.v-2 .grid{border-top-style:dashed}
+.v-2 .foot{background:none;border-top:.3mm dashed var(--line);color:var(--ink)}
+.v-2 .stub,.v-2 .info{background:var(--paper)}
+.v-2 .front .stub,.v-2 .back .stub{border-color:var(--ink)}
+.v-2 .info h3{font-weight:700}
+
+.v-3 .pass{--ink:#111111;--muted:#6b6b6b;--line:#d6d6d6;--paper:#ffffff;--accent:#e30613;--accent-soft:#111111;--accent-deep:#111111;--sun:#e30613;--sun-soft:#e30613;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;--body:"Archivo","Helvetica Neue",Arial,sans-serif;border-radius:0;outline-color:#cfcfcf}
+.v-3 .band{background:var(--paper);color:var(--ink);height:14mm;border-bottom:.4mm solid var(--ink)}
+.v-3 .brand{font-weight:900}
+.v-3 .brand small{opacity:1;color:var(--muted)}
+.v-3 .band .kind b{color:var(--accent);font-weight:900}
+.v-3 .stub .band{background:var(--accent);color:#fff;border-bottom-color:var(--accent)}
+.v-3 .back .main .band{background:var(--accent);color:#fff;border-bottom-color:var(--accent)}
+.v-3 .back .main .band .ic{fill:#fff}
+.v-3 .back .main .band small{color:#fff;opacity:.85}
+.v-3 .lbl{color:var(--accent);font-weight:700}
+.v-3 .val{font-weight:900}
+.v-3 .iata{font-size:30pt;font-weight:900;letter-spacing:-.035em;color:var(--ink)}
+.v-3 .loop .track{stroke:var(--ink)}
+.v-3 .status{background:var(--accent);color:#fff;border:0;border-radius:0}
+.v-3 .grid{border-top:.4mm solid var(--ink)}
+.v-3 .foot{background:var(--ink);color:#fff}
+.v-3 .stub,.v-3 .info{background:var(--paper)}
+.v-3 .front .stub,.v-3 .back .stub{border-style:solid;border-width:0 0 0 .3mm;border-color:var(--ink)}
+.v-3 .back .stub{border-width:0 .3mm 0 0}
+.v-3 .info h3{color:var(--accent)}
+
+.v-4 .pass{--ink:#f2ede2;--muted:#9fa9bc;--line:#33435d;--paper:#0f1b2e;--accent:#0a1422;--accent-soft:#0a1422;--accent-deep:#e6c27c;--sun:#e6c27c;--sun-soft:transparent;
+  --display:"Fraunces",Georgia,serif;--body:"DM Sans","Segoe UI",system-ui,sans-serif;outline-color:#0f1b2e}
+.v-4 .band{background:var(--accent);color:var(--ink);border-bottom:.3mm solid var(--sun)}
+.v-4 .brand{font-weight:600}
+.v-4 .val{font-weight:600}
+.v-4 .iata{font-weight:600;color:var(--sun)}
+.v-4 .lbl{color:var(--sun);opacity:.85}
+.v-4 .status{color:var(--sun);border-color:var(--sun)}
+.v-4 .foot{color:var(--ink)}
+.v-4 .stub,.v-4 .info{background:#13233a}
+.v-4 .info h3{color:var(--sun)}
+.v-4 .back .letter{background:#f6f2ea;--line:#cfc6b4}
+
+.v-5 .pass{--ink:#2b1d16;--muted:#7a6457;--line:#e0d3c7;--paper:#fffdf9;--accent:#c4421a;--accent-soft:#fbeadf;--accent-deep:#8f2d10;--sun:#f2a922;--sun-soft:#fff1d6;
+  --display:"Righteous","Segoe UI",system-ui,sans-serif;--body:"Work Sans","Segoe UI",system-ui,sans-serif;border-radius:7mm}
+.v-5 .band{position:relative;padding-bottom:3mm}
+.v-5 .band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3.2mm;background:linear-gradient(#e8742a 0 33%,#f2a922 33% 66%,#6b3a1f 66%)}
+.v-5 .brand,.v-5 .val,.v-5 .iata,.v-5 .band .kind b{font-weight:400}
+.v-5 .band .kind b{color:#ffd27a}
+.v-5 .brand small{color:#fff;opacity:.9;font-family:var(--body);font-weight:600}
+.v-5 .iata{color:var(--accent)}
+.v-5 .lbl{font-family:var(--body);color:var(--accent-deep)}
+.v-5 .status{color:var(--accent-deep);border-color:var(--sun);border-radius:4mm}
+.v-5 .stub,.v-5 .info{background:#fff7ee}
+.v-5 .info h3{color:var(--accent)}
+</style>
+</head>
+<body class="v-2">
+<p class="hint">Variante 2 · Thermodruck. A4 beidseitig drucken (über die lange Kante wenden), 100 %, nicht «an Seite anpassen». Entlang der Schnittmarken ausschneiden.</p>
+<div class="sheet">
+  <div class="sheet-label">Seite 1 · Vorderseite</div>
+  <div class="marks"></div>
+  <div class="pass front">
+    <div class="main">
+      <div class="band">
+        <div class="brand">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path class="ic" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+          <div>XtremeAir XA42<small>Kunstflug · HB-MAD</small></div>
+        </div>
+        <div class="kind">Boarding Pass<b>PHD 2026</b></div>
+      </div>
+      <div class="body">
+        <div class="pax">
+          <div>
+            <div class="lbl">Passagier</div>
+            <div class="val">DR. BENJAMIN HUNKELER</div>
+            <div class="sub">Promoviert am 2. Dezember 2026</div>
+          </div>
+          <div class="status">Peer-reviewed ✓</div>
+        </div>
+
+        <div class="route">
+          <div>
+            <div class="iata">ETH</div>
+            <div class="sub">Hönggerberg · HCI G7</div>
+          </div>
+          <svg class="loop" viewBox="0 0 160 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <path d="M4 32 C40 32 62 32 74 24 C88 14 92 2 80 2 C68 2 70 16 82 24 C96 33 120 32 146 32" fill="none" class="track" stroke-width="1.4" stroke-dasharray="3 2.4" stroke-linecap="round"/>
+            <g transform="translate(150 32) rotate(90)"><path class="ic" d="M0 -6 L1.6 -1.5 L6 1.5 L6 3 L1.6 1.8 L1.2 5 L2.6 6.2 L2.6 7.2 L0 6.4 L-2.6 7.2 L-2.6 6.2 L-1.2 5 L-1.6 1.8 L-6 3 L-6 1.5 L-1.6 -1.5 Z"/></g>
+          </svg>
+          <div class="to">
+            <div class="iata">LFGB</div>
+            <div class="sub">Habsheim · Basel</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div><div class="lbl">Flug</div><div class="val">PHD 2026</div><div class="sub">Direkt, ohne Revision</div></div>
+          <div><div class="lbl">Flugzeug</div><div class="val">XA42</div><div class="sub">HB-MAD · Kunstflug</div></div>
+          <div><div class="lbl">Klasse</div><div class="val">Doctor</div><div class="sub">Upgrade von Doktorand</div></div>
+          <div><div class="lbl">Gate</div><div class="val">G7</div><div class="sub">ETH Hönggerberg</div></div>
+          <div><div class="lbl">Sitz</div><div class="val">1A</div><div class="sub">Cockpit</div></div>
+          <div><div class="lbl">Datum</div><div class="val">Saison 2027</div><div class="sub">Wochenende nach Wahl</div></div>
+          <div><div class="lbl">Flugzeit</div><div class="val">30 MIN</div><div class="sub">Selber steuern möglich</div></div>
+          <div><div class="lbl">G-Last</div><div class="val">+8 / −5 G</div><div class="sub">Volles Kunstflugprogramm</div></div>
+          <div><div class="lbl">Video</div><div class="val">Inklusive</div><div class="sub">Aufnahme aus dem Cockpit</div></div>
+          <div><div class="lbl">Vor Ort</div><div class="val">ca. 2 h</div><div class="sub">inkl. Briefing</div></div>
+        </div>
+
+        <div class="foot">
+          <span><b>Reviewer 2:</b> «Accept with major loopings.»</span>
+          <span>Termin nach Wahl · Wochenenden März bis Oktober</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stub">
+      <div class="band"><div class="brand">PHD 2026</div></div>
+      <div class="inner">
+        <div><div class="lbl">Passagier</div><div class="val">DR. HUNKELER</div></div>
+        <div class="pair">
+          <div><div class="lbl">Von</div><div class="val">ETH</div></div>
+          <div><div class="lbl">Nach</div><div class="val">LFGB</div></div>
+        </div>
+        <div class="pair">
+          <div><div class="lbl">Sitz</div><div class="val">1A</div></div>
+          <div><div class="lbl">Klasse</div><div class="val">Doctor</div></div>
+        </div>
+        <div><div class="lbl">Boarding</div><div class="val" style="font-size:8.5pt">Nach bestandener Verteidigung ✓</div></div>
+        <div class="barcode"><svg class="bc" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"></svg><div class="code">DR-HUNKELER-HBMAD-2026</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sheet">
+  <div class="sheet-label">Seite 2 · Rückseite</div>
+  <div class="marks"></div>
+  <div class="pass back">
+    <div class="info">
+      <h3>Check-in</h3>
+      <ol>
+        <li>Bei GoAviator melden, Termin direkt mit dem Piloten abmachen.</li>
+        <li>Wochenende von März bis Oktober, bei gutem Wetter.</li>
+        <li>Flugplatz Habsheim (LFGB), 20 Min. ab Basel. Ausweis mitnehmen.</li>
+        <li>Vor Ort ca. 2 Stunden, mit Briefing.</li>
+      </ol>
+      <div class="safety">
+        <h3 style="margin-bottom:1.5mm">Gut zu wissen</h3>
+        <ul>
+          <li>Vorher nur leicht essen.</li>
+          <li>Fliegerkombi, Fallschirm und Headset sind dabei.</li>
+          <li>Limite: 1,95 m und 90 kg.</li>
+        </ul>
+      </div>
+      <div class="sub" style="margin-top:auto">goaviator.com · info@goaviator.com</div>
+    </div>
+
+    <div class="main">
+      <div class="band">
+        <div class="brand">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path class="ic" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+          <div>Für Dr. Benjamin Hunkeler<small>Von deiner Familie</small></div>
+        </div>
+      </div>
+      <div class="letter">
+        <div class="write" aria-label="Platz für den Brief von Hand"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const s = "DR-HUNKELER-HBMAD-2026";
+  document.querySelectorAll("svg.bc").forEach(svg => {
+    let seed = 0; for (const c of s) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
+    const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+    let x = 0, out = "";
+    while (x < 200) {
+      const w = 0.8 + Math.floor(rnd() * 4) * 0.9;
+      out += `<rect x="${x.toFixed(2)}" y="0" width="${w.toFixed(2)}" height="40"/>`;
+      x += w + 0.8 + Math.floor(rnd() * 3) * 0.9;
+    }
+    svg.innerHTML = out;
+  });
+  document.querySelectorAll(".marks").forEach(el => {
+    const xs = [10, 200], ys = [105.5, 191.5]; let html = "";
+    for (const x of xs) for (const y of ys) {
+      html += `<i class="v" style="left:${x}mm;top:${y < 150 ? y - 8 : y + 2}mm"></i>`;
+      html += `<i class="h" style="left:${x < 100 ? x - 5 : x + 1}mm;top:${y}mm;width:4mm"></i>`;
+    }
+    el.innerHTML = html;
+  });
+})();
+</script>
+</body>
+</html>
