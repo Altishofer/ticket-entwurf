@@ -340,6 +340,9 @@ VARIANTS = [
     ("17", "Teal Foto", ""),
 ]
 
+# Auswahl auf der Abstimmungsseite (nach der ersten Runde, 20.11.2026)
+GALLERY = ["14", "4", "17", "7"]
+
 PHOTO = ["15", "16"]
 STUBPHOTO = ["4", "9", "11", "14", "17"]
 PHOTO_CSS = "".join(f".v-{k} .phf{{display:block}}.v-{k} .loop{{display:none}}.v-{k} .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){{display:none}}\n" for k in PHOTO)
@@ -462,8 +465,9 @@ FIT_SCRIPT = """<script>
 
 def gallery():
     blocks = ""
-    for i, (k, n, _) in enumerate(VARIANTS):
-        letter = str(i + 1)
+    shown = {k: (k, n, c) for k, n, c in VARIANTS}
+    for k, n, _ in (shown[x] for x in GALLERY):
+        letter = k
         blocks += f"""
 <section class="variant v-{k}" id="v{letter}">
   <h2>{letter}</h2>
