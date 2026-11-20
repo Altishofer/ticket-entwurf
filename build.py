@@ -375,7 +375,7 @@ def front_for(k):
 LABELS = {"14o": "14 · Original", "14p": "14 · nur Zierlinien", "14": "14 · verfeinert"}
 
 # Auswahl auf der Abstimmungsseite (nach der ersten Runde, 20.11.2026)
-GALLERY = ["14o", "14p", "14", "4", "17", "7"]
+GALLERY = ["14o", "14p", "14"]
 
 PHOTO = ["15", "16"]
 STUBPHOTO = ["4", "9", "11", "14", "14o", "14p", "17"]
