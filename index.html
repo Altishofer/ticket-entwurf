@@ -111,7 +111,9 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 
 .body{position:relative}
 .rp{display:none;height:13mm;width:auto;max-width:100%;margin:0 auto;fill:var(--accent-deep)}
-.ph{display:none;height:15.5mm;width:auto;max-width:100%;margin:-1.6mm auto;filter:drop-shadow(0 .8mm 1mm rgba(0,0,0,.22))}
+.phf{display:none;width:100%;height:26mm;overflow:visible;margin:-1.5mm 0 -1mm}
+.phf .trail{fill:none;stroke:var(--accent-deep);stroke-width:.5;stroke-dasharray:1.4 1.1;stroke-linecap:round}
+.phf image{filter:drop-shadow(0 .6px .8px rgba(0,0,0,.25))}
 .qrbox{margin-top:auto;display:grid;grid-template-columns:17mm 1fr;gap:2.4mm;align-items:center}
 .qr{background:#fff;border-radius:1.2mm;padding:1.6mm;line-height:0;box-shadow:0 0 0 .2mm rgba(0,0,0,.12)}
 .qr svg{display:block;width:100%;height:auto;fill:#0f1420}
@@ -122,20 +124,12 @@ html,body{margin:0;background:#dfe3ea;color:var(--ink);font-family:var(--body)}
 .ic{fill:var(--sun)}
 .loop .track{stroke:var(--accent-deep)}
 .barcode rect{fill:var(--ink)}
-.v-1 .ph{display:block}.v-1 .loop{display:none}
-.v-2 .ph{display:block}.v-2 .loop{display:none}
-.v-3 .ph{display:block}.v-3 .loop{display:none}
-.v-4 .ph{display:block}.v-4 .loop{display:none}
-.v-5 .ph{display:block}.v-5 .loop{display:none}
-.v-8 .ph{display:block}.v-8 .loop{display:none}
-.v-9 .ph{display:block}.v-9 .loop{display:none}
-.v-10 .ph{display:block}.v-10 .loop{display:none}
-.v-11 .ph{display:block}.v-11 .loop{display:none}
-.v-13 .ph{display:block}.v-13 .loop{display:none}
-.v-14 .ph{display:block}.v-14 .loop{display:none}
-.v-15 .ph{display:block}.v-15 .loop{display:none}
-.v-16 .ph{display:block}.v-16 .loop{display:none}
-.v-2 .ph{filter:grayscale(1) contrast(1.15)}
+.v-4 .phf{display:block}.v-4 .loop{display:none}.v-4 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
+.v-9 .phf{display:block}.v-9 .loop{display:none}.v-9 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
+.v-11 .phf{display:block}.v-11 .loop{display:none}.v-11 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
+.v-14 .phf{display:block}.v-14 .loop{display:none}.v-14 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
+.v-15 .phf{display:block}.v-15 .loop{display:none}.v-15 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
+.v-16 .phf{display:block}.v-16 .loop{display:none}.v-16 .grid > div:is(:nth-child(2),:nth-child(4),:nth-child(5),:nth-child(9),:nth-child(10)){display:none}
 
 .v-2 .pass{--ink:#16181d;--muted:#5b6069;--line:#b7bac0;--paper:#fbfbf8;--accent:#16181d;--accent-soft:#fbfbf8;--accent-deep:#16181d;--sun:#2346a0;--sun-soft:transparent;
   --display:"IBM Plex Mono",ui-monospace,monospace;--body:"IBM Plex Mono",ui-monospace,monospace;--mono:"IBM Plex Mono",ui-monospace,monospace;border-radius:2mm}
@@ -428,7 +422,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -552,7 +546,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -676,7 +670,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -800,7 +794,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -924,7 +918,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1048,7 +1042,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1172,7 +1166,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1296,7 +1290,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1420,7 +1414,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1544,7 +1538,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1668,7 +1662,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1792,7 +1786,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -1916,7 +1910,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -2040,7 +2034,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -2164,7 +2158,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
@@ -2288,7 +2282,7 @@ body{-webkit-tap-highlight-color:transparent}
 <path d="M22 35.5 L25 35.4 L29.5 43 L26.6 43.5 Z"/><circle cx="28.4" cy="44.6" r="2.1"/>
 <path d="M290.5 5 C291.9 5 292.5 7 292.5 9 L292.5 69 C292.5 71 291.9 73 290.5 73 C289.1 73 288.5 71 288.5 69 L288.5 9 C288.5 7 289.1 5 290.5 5 Z"/>
 </svg>
-          <img class="ph" src="hb-mad.png" alt="">
+          <svg class="phf" viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="M3 25 C14 25 19 25 23 21 C27 17 27 12 23 12 C19 12 19 17 23 21 C27 25 50 27 72 26.5 C86 26 95 25 89.5 22"/><image href="hb-mad.png" x="50" y="0" width="42.5" height="29.2"/></svg>
           <div class="to">
             <div class="iata">LFGB</div>
             <div class="sub">Habsheim · Basel</div>
