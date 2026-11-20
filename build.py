@@ -607,6 +607,44 @@ setTimeout(() => location.replace("{RICKROLL}"), 3300);
 (HERE / "checkin").mkdir(exist_ok=True)
 (HERE / "checkin" / "index.html").write_text(CHECKIN)
 
+READY_CSS = """
+/* Druckvorlage: Endformat 190 x 86 mm + 3 mm Beschnitt rundherum, eine Seite pro Seite des Passes */
+@page{size:196mm 92mm;margin:0}
+html,body{margin:0;background:#fff}
+.page{width:196mm;height:92mm;position:relative;overflow:hidden;background:#fff;page-break-after:always;break-after:page}
+.page .pass{left:3mm;top:3mm;border-radius:0;outline:0;overflow:visible}
+.v-14r .front .main .band{box-shadow:0 -3mm 0 #1b2a78,-3mm 0 0 #1b2a78,-3mm -3mm 0 #1b2a78}
+.v-14r .front .stub .band{box-shadow:0 -3mm 0 #1b2a78,3mm 0 0 #1b2a78,3mm -3mm 0 #1b2a78}
+.v-14r .front .stub{box-shadow:3mm 0 0 #f6f7fb,0 3mm 0 #f6f7fb,3mm 3mm 0 #f6f7fb}
+.v-14r .front .foot{box-shadow:-3mm 0 0 #1b2a78,0 3mm 0 #1b2a78,-3mm 3mm 0 #1b2a78}
+.v-14r .back .info{box-shadow:-3mm 0 0 #f6f7fb,0 -3mm 0 #f6f7fb,0 3mm 0 #f6f7fb,-3mm -3mm 0 #f6f7fb,-3mm 3mm 0 #f6f7fb}
+.v-14r .back .main .band{box-shadow:0 -3mm 0 #1b2a78,3mm 0 0 #1b2a78,3mm -3mm 0 #1b2a78}
+"""
+
+
+def ready_file(key):
+    return f"""<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<title>Boarding Pass Druckvorlage</title>
+<link href="{FONTS}" rel="stylesheet">
+<style>{style}{ALL_VARIANT_CSS}{READY_CSS}</style>
+</head>
+<body class="v-{key}">
+<div class="page">
+{front_for(key)}</div>
+<div class="page">
+{back}</div>
+{SCRIPT}
+</body>
+</html>
+"""
+
+
+(HERE / "druck").mkdir(exist_ok=True)
+(HERE / "druck" / "boarding-pass-druck.html").write_text(ready_file("14r").replace('src="hb-mad.png"', 'src="../hb-mad.png"'))
+
 for k, n, _ in VARIANTS:
     (HERE / f"boarding-pass-{k}.html").write_text(print_file(k, n))
 (HERE / "index.html").write_text(gallery())
