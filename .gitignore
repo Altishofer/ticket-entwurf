@@ -1,2 +1,5 @@
-*.pdf
-__pycache__/
+# Öffentlich ist nur die Check-in-Seite (Ziel des QR-Codes). Alles andere bleibt lokal.
+/*
+!/checkin/
+!/.gitignore
+!/.nojekyll
